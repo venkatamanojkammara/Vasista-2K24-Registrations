@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .form-logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <img src="c:\Users\venka\OneDrive\Documents\Form_Event_Registration\Untitled_design.png" alt="Logo" class="form-logo">
+        <h2>Vasista 2k24 Registration Form</h2>
+        <form id="userForm" name="submit-to-google-sheet">
+            <input type="text" id="name" name="name" placeholder="Name" required><br>
+            <input type="text" id="id" name="id" placeholder="ID" required><br>
+            <input type="text" id="mobile" name="mobile" placeholder="Mobile" required><br>
+
+            <select id="year" name="year" required>
+                <option value="" disabled selected>Student Year</option>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
+                <option value="E1">E1</option>
+                <option value="E2">E2</option>
+                <option value="E3">E3</option>
+                <option value="E4">E4</option>
+            </select><br>
+            
+            <select id="pre-events" name="pre-events" required>
+                <option value="" disabled selected>Pre Events</option>
+                <option value="Quiz">Quiz</option>
+                <option value="Coding Contest">Coding Contest</option>
+                <option value="Debate">Debate</option>
+                <option value="Drawing/Painting">Drawing/Painting</option>
+                <option value="Treasure Hunt">Treasure Hunt</option>
+                <option value="Singing">Singing</option>
+            </select><br>
+
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Category</option>
+                <option value="Online">Single</option>
+                <option value="Offline">Team</option>
+            </select><br>
+            
+            <select id="registration" name="registration" required>
+                <option value="" disabled selected>Registration Location</option>
+                <option value="AB1">AB1</option>
+                <option value="AB2">AB2</option>
+                <option value="Old Campus">Old Campus</option>
+                <option value="Girls Hostel">Girls Hostel</option>
+            </select><br>
+
+            <select id="payment" name="payment" required>
+                <option value="" disabled selected>Payment Mode</option>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+            </select><br>
+
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <div class="success-message" id="successMessage">
+            Your information has been successfully submitted!
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxdXoF8H7FRZ4Bg6lwm9BkBekkxPh7lp9Gw9oGH3q4V5SUtP1H0RWyEht5RQ-AQ09I2/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
